@@ -1,0 +1,3 @@
+https://example.com
+https://contoso.sharepoint.com
+https://contoso.sharepoint.com/sites/Site1
