@@ -1,0 +1,7 @@
+Add reference -> COM -> MS Utility (Logparser Interfaces)
+Add reference -> System.Web  (HttpUtilities)
+
+Edit MSUtil properties, set Embed Interop Types = False
+
+---
+
