@@ -63,12 +63,16 @@ function loadPage(address)	{
 				}, waitTime);
 			} else {
 				if (address != page.url){
-					console.log('Redirected: ' + page.url);
+					
 					// We got redirected to the SPO login page so start login process
 					if (page.url.indexOf("login.microsoftonline.com") != -1)	{
 						spoLogin.getCreds();
 						waitTime += LOGIN_WAIT_TIME;
 						var interval = setInterval(spoLogin.performLoginSteps, config.settings.LOGIN_WAIT_TIME / spoLogin.loginSteps.length);
+					}
+					else {
+						console.log("Redirected to this URL: " + page.url);
+						fs.write(outputFile, "Redirected to this URL: " + page.url + "\n", "a");
 					}
 				}
 				setTimeout(function () {
