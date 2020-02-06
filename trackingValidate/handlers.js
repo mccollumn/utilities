@@ -7,6 +7,7 @@ onResourceRequested = function (res) {
 		if (config.resources_to_log[length].test(res.url)){
 			console.log(res.url);
 			fs.write(outputFile, res.url + "\n", "a");
+			requestCount++;
 		}
 	}
 };

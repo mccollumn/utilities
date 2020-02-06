@@ -5,7 +5,7 @@
 * Usage:
 * phantomjs --ssl-protocol=any trackingValidate.js pages.txt
 *
-* v1.5 1/28/2020
+* v1.6 2/5/2020
 * Nick M.
 */
 
@@ -25,7 +25,9 @@ const CONSOLE_LOG = config.settings.CONSOLE_LOG;
 var address;
 var pages;
 var pageCount = 0;
+var requestCount = 0;
 var outputFile = "results.txt";
+var noTrackingFile = "notracking.txt";
 
 // Read each line of the pages file into an array
 function readTextFile(file)	{
@@ -76,6 +78,10 @@ function loadPage(address)	{
 					}
 				}
 				setTimeout(function () {
+					if (requestCount == 0) {
+						fs.write(noTrackingFile, page.url + "\n", "a");
+					}
+					requestCount = 0;
 					pageCount++;
 					nextPage();
 				}, waitTime);
@@ -115,10 +121,11 @@ if (system.args.length === 1) {
 	var filePath = system.args[1];
 	pages = readTextFile(filePath);
 	
-	// Write output file heading
+	// Write output file headings
 	var d = new Date();
 	fs.write(outputFile, d + "\n", "w");
 	fs.write(outputFile, page.settings.userAgent + "\n\n", "a");
+	fs.write(noTrackingFile, d + "\n\n", "w");
 	
 	// Attach handlers
 	page.onResourceRequested = handlers.onResourceRequested;

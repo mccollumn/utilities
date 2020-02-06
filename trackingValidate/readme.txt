@@ -5,6 +5,7 @@ Usage:
  -Enter a list of all pages to test, one per line.
  -Run "trackingValidate.bat".
  -Results are output to "results.txt".
+ -A list of pages that made no requests is output to "notracking.txt".
 
 If testing SharePoint Online pages, credentials will need to be provided.
  -Edit "creds.js" and enter the username and password.
